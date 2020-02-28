@@ -13,11 +13,12 @@ module.exports = () => {
     function calculate (formula) {
         if (formula.includes('+')) {
             return processAction(split(formula, '+'), sum, 0)
-        } else if (formula.includes("*") ) {
-            return processAction(split(formula, '*'), multiply, 1)
-        }  else if (formula.includes('-')) {
+        } else if (formula.includes('-')) {
             const numArray = split(formula, '-')
             return processAction(numArray.slice(1), subtract, numArray[0])
+        }
+        else if (formula.includes("*") ) {
+            return processAction(split(formula, '*'), multiply, 1)
         }
         return Number(formula)
     }

@@ -58,4 +58,12 @@ describe('stringCalculator', () => {
 
         expect(actualResult).to.equal(expectedResult)
     })
+
+    it('should return 6 for 1+2*4-3', () => {
+        const expectedResult = 6
+
+        const actualResult = calculator.calculate('1+2*4-3')
+
+        expect(actualResult).to.equal(expectedResult)
+    })
 })
