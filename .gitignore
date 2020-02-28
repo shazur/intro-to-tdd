@@ -1,0 +1,9 @@
+node_modules
+package-lock.json
+*.iml
+*.sublime-workspace
+pnpm-debug.log
+npm-debug.log
+npm-debug.log.*
+.DS_Store
+.idea
