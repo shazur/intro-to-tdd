@@ -1,69 +1,65 @@
-const stringCalculator = require('../src/stringCalculator')
+const stringCalculator = require('../src/stringCalculator2')
 const {expect} = require('chai')
 
 describe('stringCalculator', () => {
     const calculator = stringCalculator()
-    it('should return 1 for 1', () => {
-        const expectedResult = 1
+    it('returns 1 for 1', () => {
+        const result = calculator.calculate('1')
 
-        const actualResult = calculator.calculate('1')
-
-        expect(actualResult).to.equal(expectedResult)
+        expect(result).to.equal(1)
     })
 
-    it('should return 2 for 2', () => {
-        const expectedResult = 2
+    it('returns 2 for 2', () => {
+        const result = calculator.calculate('2')
 
-        const actualResult = calculator.calculate('2')
-
-        expect(actualResult).to.equal(expectedResult)
+        expect(result).to.equal(2)
     })
 
-    it('should return 3 for 1+2', () => {
-        const expectedResult = 3
+    it('returns 3 for 1+2', () => {
+        const result = calculator.calculate('1+2')
 
-        const actualResult = calculator.calculate('1+2')
-
-        expect(actualResult).to.equal(expectedResult)
+        expect(result).to.equal(3)
     })
 
-    it('should return 3 for 1+1+1', () => {
-        const expectedResult = 3
+    it('returns 3 for 1+1+1', () => {
+        const result = calculator.calculate('1+1+1')
 
-        const actualResult = calculator.calculate('1+1+1')
-
-        expect(actualResult).to.equal(expectedResult)
+        expect(result).to.equal(3)
     })
 
-    it('should return 4 for 2*2', () => {
-        const expectedResult = 4
+    it('returns 6 for 2*3', () => {
+        const result = calculator.calculate('2*3')
 
-        const actualResult = calculator.calculate('2*2')
-
-        expect(actualResult).to.equal(expectedResult)
+        expect(result).to.equal(6)
     })
 
-    it('should return 5 for 1+2*2', () => {
-        const expectedResult = 5
+    it('returns 24 for 2*3*4', () => {
+        const result = calculator.calculate('2*3*4')
 
-        const actualResult = calculator.calculate('1+2*2')
-
-        expect(actualResult).to.equal(expectedResult)
+        expect(result).to.equal(24)
     })
 
-    it('should return 2 for 3-1', () => {
-        const expectedResult = 2
+    it('returns 14 for 3*4+2', () => {
+        const result = calculator.calculate('3*4+2')
 
-        const actualResult = calculator.calculate('3-1')
-
-        expect(actualResult).to.equal(expectedResult)
+        expect(result).to.equal(14)
     })
 
-    it('should return 6 for 1+2*4-3', () => {
-        const expectedResult = 6
+    it('returns 3 for 8-5', () => {
+        const result = calculator.calculate('8-5')
 
-        const actualResult = calculator.calculate('1+2*4-3')
+        expect(result).to.equal(3)
+    })
 
-        expect(actualResult).to.equal(expectedResult)
+    it('returns 3 for 8-4-1', () => {
+        const result = calculator.calculate('8-4-1')
+
+        expect(result).to.equal(3)
+    })
+
+    it('returns 6 for 1+2*4-3', () => {
+        const result = calculator.calculate('1+2*4-3')
+
+        expect(result).to.equal(6)
     })
 })

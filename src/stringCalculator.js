@@ -1,29 +1,36 @@
-module.exports = () => {
+const multiply = (num1, num2) => num1 * num2
+const sum = (num1, num2) => num1 + num2
+const minus = (num1, num2) => num1 - num2
 
-    function processAction(numArray, action, initialValue) {
-        return numArray.reduce((result, num) => {
-            return action(calculate(result.toString()), calculate(num))
+module.exports = () => {
+    function executeOperation(formula, sign, operation, initialValue) {
+        return formula.split(sign).reduce((result, strNum) => {
+            return operation(calculate(result.toString()), calculate(strNum))
         }, initialValue)
     }
-    const sum = (a, b) => a + b
-    const multiply = (a, b) => a * b
-    const subtract = (a, b) => a - b
-    const split = (formula, separator) => formula.split(separator)
+    function handleMultiply(formula) {
+        return executeOperation(formula, '*', multiply, 1)
+    }
+    function handleSum(formula) {
+        return executeOperation(formula, '+', sum, 0)
+    }
+    function handleMinus(formula) {
+        const minusIndex = formula.indexOf('-')
+        const subtrahend = formula.substring(minusIndex + 1)
+        const minuend = formula.substring(0, minusIndex)
+        return executeOperation(subtrahend, '-', minus, minuend)
+    }
 
-    function calculate (formula) {
+    function calculate(formula) {
         if (formula.includes('+')) {
-            return processAction(split(formula, '+'), sum, 0)
-        } else if (formula.includes('-')) {
-            const numArray = split(formula, '-')
-            return processAction(numArray.slice(1), subtract, numArray[0])
+            return handleSum(formula)
+        } else if(formula.includes('-')) {
+            return handleMinus(formula)
         }
-        else if (formula.includes("*") ) {
-            return processAction(split(formula, '*'), multiply, 1)
+        else if (formula.includes('*')) {
+            return handleMultiply(formula)
         }
         return Number(formula)
     }
-
-    return {
-        calculate
-    }
+    return {calculate}
 }
