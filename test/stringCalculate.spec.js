@@ -1,4 +1,4 @@
-const stringCalculator = require('../src/stringCalculator2')
+const stringCalculator = require('../src/stringCalculator')
 const {expect} = require('chai')
 
 describe('stringCalculator', () => {
