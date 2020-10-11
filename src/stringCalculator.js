@@ -1,22 +1,24 @@
 const MINUS = '-'
-const PLUS = '+'
 const MULTIPLY = '*'
-const sum = (num1, num2) => num1 + num2
-const multiply = (num1, num2) => num1 * num2
-const subtract = (minuend, subtrahend) => minuend - subtrahend
+const PLUS = '+'
+const sum = (numA, numB) => numA + numB
+const mult = (numA, numB) => numA * numB
+const subtract = (numA, numB) => numA - numB
 
 module.exports = () => {
     function handleOperation(formula, sign, initialValue, operation) {
-        return formula.split(sign).reduce((result, strNum) => {
-            return operation(result, calculate(strNum))
+        const numArray = formula.split(sign)
+        return numArray.reduce((result, numStr) => {
+            return operation(result, calculate(numStr))
         }, initialValue)
     }
+
     function handleSum(formula) {
         return handleOperation(formula, PLUS, 0, sum)
     }
 
     function handleMultiplication(formula) {
-        return handleOperation(formula, MULTIPLY, 1, multiply)
+        return handleOperation(formula, MULTIPLY, 1, mult)
     }
 
     function handleSubtraction(formula) {
@@ -38,5 +40,8 @@ module.exports = () => {
         }
         return Number(formula)
     }
-    return {calculate}
+
+    return {
+        calculate
+    }
 }
