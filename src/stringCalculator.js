@@ -7,21 +7,23 @@ const subtract = (minuend, subtrahend) => minuend - subtrahend
 
 module.exports = () => {
     function handleOperation(formula, sign, initialValue, operation) {
-        return formula.split(sign).reduce((result, strNumber) => {
-            return operation(calculate(String(result)), calculate(strNumber))
+        return formula.split(sign).reduce((result, strNum) => {
+            return operation(result, calculate(strNum))
         }, initialValue)
     }
     function handleSum(formula) {
         return handleOperation(formula, PLUS, 0, sum)
     }
-    function handleMultiply(formula) {
+
+    function handleMultiplication(formula) {
         return handleOperation(formula, MULTIPLY, 1, multiply)
     }
-    function handleSubtract(formula) {
+
+    function handleSubtraction(formula) {
         const minusIndex = formula.indexOf(MINUS)
         const minuend = formula.substring(0, minusIndex)
         const subtrahend = formula.substring(minusIndex + 1)
-        return handleOperation(subtrahend, MINUS, minuend, subtract)
+        return handleOperation(subtrahend, MINUS, calculate(minuend), subtract)
     }
 
     function calculate(formula) {
@@ -29,10 +31,10 @@ module.exports = () => {
             return handleSum(formula)
         }
         if (formula.includes(MINUS)) {
-            return handleSubtract(formula)
+            return handleSubtraction(formula)
         }
         if (formula.includes(MULTIPLY)) {
-            return handleMultiply(formula)
+            return handleMultiplication(formula)
         }
         return Number(formula)
     }
